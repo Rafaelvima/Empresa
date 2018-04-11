@@ -1,0 +1,14 @@
+{
+    "name": "vendor/equipos-o-o",
+    "description": "Description of project EquiposOO.",
+    "authors": [
+        {
+            "name": "User",
+            "email": "your@email.here"
+        }
+    ],"autoload": {
+        "psr-4": {
+            "": "lib/"
+        }
+    }
+}
