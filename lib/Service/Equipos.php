@@ -16,5 +16,4 @@ class Equipos {
         $this->equiposLoader = $equiposLoader;
     }
 
-    
 }

@@ -3,9 +3,16 @@
 use Service\Container;
 
 require __DIR__ . '/bootstrap.php';
-
+if (isset($_REQUEST['equipo_id'])) {
+    $equipo_id = $_REQUEST['equipo_id'];
+} else {
+    $equipo_id = 1;
+}
 $container = new Container($configuration);
-$equiposData = $container->getEquiposLoader()->findAll();
+//$jugadoresData = $container->getJugadoresLoader()->findAll();
+$jugadoresData = $container->getJugadoresLoader()->findJugadoresById($equipo_id);
+$equipo= $container->getEquiposLoader()->findNombreEquipo($equipo_id);
+var_dump($equipo);
 ?>
 <!DOCTYPE html>
 <!--
@@ -18,7 +25,7 @@ and open the template in the editor.
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Equipos</title>
+        <title>JUGADORES</title>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -36,7 +43,8 @@ and open the template in the editor.
     <body>
         <div class="container">
             <div class="page-header">
-                <h1>Lista de Equipos</h1>
+                <h1>JUGADORES DEL   <?php echo $equipo[0]->getNombre(); ?>
+                        </h1>
             </div>
             <table class="table table-hover">
                 <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
@@ -48,11 +56,11 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($equiposData as $equipo) { ?>
+                    <?php foreach ($jugadoresData as $jugador) { ?>
                         <tr>
-                            <td><?php echo $equipo->getId(); ?></td>
-                            <td><?php echo $equipo->getNombre(); ?></td>
-                            <td><?php echo $equipo->getEstadio(); ?></td>
+                            <td><?php echo $jugador->getId(); ?></td>
+                            <td><?php echo $jugador->getNombre(); ?></td>
+                            <td><?php echo $jugador->getEdad(); ?></td>
 
                         </tr>
                     <?php } ?>

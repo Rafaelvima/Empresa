@@ -29,6 +29,11 @@ class EquiposLoader {
         $equipos = $this->mysqli->query('SELECT * FROM equipos');
         return $this->getEquiposArray($equipos);
     }
+    public function findNombreEquipo($id){
+        $equipo = $this->mysqli->real_escape_string($id);
+        $nombreEquipo = $this->mysqli->query("SELECT * FROM equipos WHERE id = '$equipo'");
+        return $this->getEquiposArray($nombreEquipo);
+    }
     
     private function getEquiposArray($equiposArr) {
         $equiposResult = [];

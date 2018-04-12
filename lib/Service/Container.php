@@ -8,37 +8,42 @@
 
 namespace Service;
 
-/**
- * Description of Container
- *
- * @author User
- */
+use mysqli;
+
 class Container {
 
     private $configuration;
-    
     private $mysqli;
-    
-     public function __construct(array $configuration)
-    {
+    private $equiposLoader;
+    private $jugadoresLoader;
+
+    public function __construct(array $configuration) {
         $this->configuration = $configuration;
     }
-     public function getMysqli()
-    {
-         
+
+    public function getMysqli() {
+
         if ($this->mysqli === null) {
-            $this->mysqli = new \mysqli(
-                $this->configuration['db_sname'],
-                $this->configuration['db_user'],
-                $this->configuration['db_pass'],
-                $this->configuration['db_dbname']
+            $this->mysqli = new mysqli(
+                    $this->configuration['db_sname'], $this->configuration['db_user'], $this->configuration['db_pass'], $this->configuration['db_dbname']
             );
         }
 
         return $this->mysqli;
     }
-    public function getEquiposLoader(){
-        return new EquiposLoader($this->getMysqli());
+
+    public function getEquiposLoader() {
+        if ($this->equiposLoader === null) {
+            $this->equiposLoader = new EquiposLoader($this->getMysqli());
+        }
+        return $this->equiposLoader;
     }
-    
+
+    public function getJugadoresLoader() {
+        if ($this->jugadoresLoader === null) {
+            $this->jugadoresLoader = new JugadoresLoader($this->getMysqli());
+        }
+        return $this->jugadoresLoader;
+    }
+
 }
