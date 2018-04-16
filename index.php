@@ -31,6 +31,7 @@ and open the template in the editor.
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
     </head>
 
     <body>
@@ -39,7 +40,7 @@ and open the template in the editor.
                 <h1>Lista de Equipos</h1>
             </div>
             <table class="table table-hover">
-                <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
+                <caption><i class="fa fa-car"></i> Equipos potentes</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -53,6 +54,10 @@ and open the template in the editor.
                             <td><?php echo $equipo->getId(); ?></td>
                             <td><?php echo $equipo->getNombre(); ?></td>
                             <td><?php echo $equipo->getEstadio(); ?></td>
+                            <td>
+                                <a href="jugadores.php?equipo_id=<?php echo $equipo->getId(); ?>" class="btn btn-default">ver jugadores del <?php echo $equipo->getNombre(); ?></a>
+                                <a href="editor.php?equipo_id=<?php echo $equipo->getId(); ?>" class="btn btn-default">añadir jugadores del <?php echo $equipo->getNombre(); ?></a>
+                            </td>
 
                         </tr>
                     <?php } ?>

@@ -8,11 +8,16 @@ if (isset($_REQUEST['equipo_id'])) {
 } else {
     $equipo_id = 1;
 }
+if (isset($_REQUEST['mensaje'])) {
+    $mensaje = $_REQUEST['mensaje'];
+    echo $mensaje;
+} else {
+    $mensaje = null;
+}
 $container = new Container($configuration);
 //$jugadoresData = $container->getJugadoresLoader()->findAll();
 $jugadoresData = $container->getJugadoresLoader()->findJugadoresById($equipo_id);
-$equipo= $container->getEquiposLoader()->findNombreEquipo($equipo_id);
-var_dump($equipo);
+$equipo = $container->getEquiposLoader()->findNombreEquipo($equipo_id);
 ?>
 <!DOCTYPE html>
 <!--
@@ -44,10 +49,10 @@ and open the template in the editor.
         <div class="container">
             <div class="page-header">
                 <h1>JUGADORES DEL   <?php echo $equipo[0]->getNombre(); ?>
-                        </h1>
+                </h1>
             </div>
             <table class="table table-hover">
-                <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
+                <caption><i class="fa fa-ball"></i> jugadores chetaos</caption>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -61,6 +66,11 @@ and open the template in the editor.
                             <td><?php echo $jugador->getId(); ?></td>
                             <td><?php echo $jugador->getNombre(); ?></td>
                             <td><?php echo $jugador->getEdad(); ?></td>
+                            <td>
+                                <a href="editor.php?id=<?php echo $jugador->getId(); ?>" class="btn btn-default">editar a  <?php echo $jugador->getNombre(); ?></a>
+                            <td>
+                                <a href="actionJugador.php?id=<?php echo $jugador->getId();?>&equipo_id=<?php echo $jugador->getEquipo_id(); ?>&action=2" class="btn btn-default">eliminar a  <?php echo $jugador->getNombre(); ?></a>
+                            </td>
 
                         </tr>
                     <?php } ?>
